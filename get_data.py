@@ -55,7 +55,7 @@ while True:
 
     params["start"] += 10
 
-# Let's make a Pandas DataFrame
+# Let's create a Pandas DataFrame
 
 data = pd.DataFrame(jobs)
 
@@ -75,18 +75,13 @@ finally:
     if conn is not None:
         conn.close()
 
-#Let's also load the data in our PostgreSQL database.We need certain parameters in order to connect to the PostgreSQL database.
+#Let's also load the data in our PostgreSQL database.
 
 engine = None
 
-host = 'localhost'
-database = 'projectdb'
-user = os.environ['USER_ID']
-password = os.environ['DB_PASS']
-port_id = 5432
 
 try:
-    engine = create_engine(f'postgresql+psycopg2://{user}:{password}@localhost/projectdb')
+    engine = create_engine(f'postgresql+psycopg2://{USER_ID}:{DB_PASS}@localhost/projectdb')
     data.to_sql('california_data_jobs', engine, index = False, if_exists = 'append')
     print('We successfully loaded ' + str(len(data)) + ' rows of data into our table in our PostgreSQL database !')
 
